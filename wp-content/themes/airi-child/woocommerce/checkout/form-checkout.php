@@ -329,7 +329,7 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
     border: 2px solid #fed2c7;
     font-size: 1.5rem;
     font-weight: 600;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
     letter-spacing: 0.1rem;
     width: 100%;
 }

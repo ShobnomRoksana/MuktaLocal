@@ -151,7 +151,7 @@ $user = wp_get_current_user(); ?>
     </p>';
   ?>
   <p class="req_field_text"><span>*</span> Required Field</p>
-  <form class="woocommerce-EditAccountForm edit-account login_edit_form" action="/my-account/edit-account/" method="post" <?php do_action( 'woocommerce_edit_account_form_tag' ); ?> >
+  <form class="woocommerce-EditAccountForm edit-account login_edit_form" action="/mukta/my-account/edit-account/" method="post" <?php do_action( 'woocommerce_edit_account_form_tag' ); ?> >
 
 	<?php do_action( 'woocommerce_edit_account_form_start' ); ?>
 

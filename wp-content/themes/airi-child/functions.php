@@ -445,6 +445,10 @@ function wc_register_form_password_repeat() {
         <label for="billing_phone"><?php _e('Phone', 'woocommerce'); ?> <span class="required">*</span></label>
         <input type="text" class="input-text" name="billing_phone" id="billing_phone" placeholder="Mobile Number *" value="<?php esc_attr_e($_POST['billing_phone']); ?>" />
     </p>
+    <p class="form-row form-row-wide">
+        <label for="billing_nid"><?php _e('NID/Passport', 'woocommerce'); ?> *</label>
+        <input type="text" class="input-text" name="billing_nid" id="billing_nid" placeholder="NID/Passport Number *" value="<?php echo esc_attr($user_nid); ?>" />
+    </p>
 <?php
 }
 
@@ -524,6 +528,9 @@ function conditional_fields_validation($username, $email, $validation_errors) {
     if (isset($_POST['billing_phone']) && empty($_POST['billing_phone'])) {
         $validation_errors->add('billing_phone_error', __('Mobile Number is required!', 'woocommerce'));
     }
+    if (isset($_POST['billing_nid']) && empty($_POST['billing_nid'])) {
+        $validation_errors->add('billing_nid_error', __('NID/Passport number is required!', 'woocommerce'));
+    }
     // Shobnom: 23-10-2020 -> deleted unnecessary code
     return $validation_errors;
 }
@@ -548,6 +555,9 @@ function custom_airi_save_extra_register_select_field($customer_id) {
     }
     if (isset($_POST['billing_phone'])) {
         update_user_meta($customer_id, 'billing_phone', $_POST['billing_phone']);
+    }
+    if (isset($_POST['billing_nid'])) {
+        update_user_meta($customer_id, 'billing_nid', $_POST['billing_nid']);
     }
     // Shobnom: 23-10-2020 -> deleted unnecessary code
 }
@@ -1155,6 +1165,7 @@ function add_custom_fields_to_edit_account_form()
     $user_id = get_current_user_id();
     $user_country = get_user_meta($user_id, 'billing_country', true);
     $user_phone = get_user_meta($user_id, 'billing_phone', true);
+    $user_nid = get_user_meta($user_id, 'billing_nid', true);
     $user_dob = get_user_meta($user_id, 'dob', true);
     // First Field
 ?>
@@ -1177,6 +1188,13 @@ function add_custom_fields_to_edit_account_form()
     <p class="form-row form-row-wide">
         <label for="billing_phone"><?php _e('Phone', 'woocommerce'); ?> *</label>
         <input type="text" class="input-text" name="billing_phone" id="billing_phone" placeholder="Mobile Number *" value="<?php echo esc_attr($user_phone); ?>" />
+    </p>
+    <?php
+    // Forth Field
+    ?>
+    <p class="form-row form-row-wide">
+        <label for="billing_nid"><?php _e('NID/Passport', 'woocommerce'); ?> *</label>
+        <input type="text" class="input-text" name="billing_nid" id="billing_nid" placeholder="NID/Passport Number *" value="<?php echo esc_attr($user_nid); ?>" />
     </p>
     <div class="clear"></div>
 <?php
@@ -1207,6 +1225,7 @@ function account_custom_field_make_required($required_fields)
     $required_fields['billing_phone'] = 'Mobile Number';
     $required_fields['billing_country'] = 'Country';
     $required_fields['dob'] = 'Date Of Birth';
+    $required_fields['billing_nid'] = 'NID/Passport Number';
     return $required_fields;
 }
 
